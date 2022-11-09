@@ -11,15 +11,18 @@ import { LeaderService } from '../services/leader.service';
 export class AboutComponent implements OnInit {
 
   dish: Dish;
-  leader: Leader[];
+  leaders: Leader[];
 
   constructor(private dishService: DishService,
     private leaderService: LeaderService) { }
 
   ngOnInit() {
-    this.dish = this.dishService.getFeaturedDish();
+    this.dishService.getFeaturedDish()
+    .then(dish => this.dish = dish);
     // this.leader = this.leaderService.getFeaturedLeader();
-    this.leader = this.leaderService.getLeaders();
+
+    this.leaderService.getLeaders()
+    .then(leaders => this.leaders = leaders);
   }
 
 }

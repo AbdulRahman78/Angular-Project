@@ -18,11 +18,11 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
     this.dishService.getFeaturedDish()
-    .then(dish => this.dish = dish);
+    .subscribe(dish => this.dish = dish);
     // this.leader = this.leaderService.getFeaturedLeader();
 
     this.leaderService.getLeaders()
-    .then(leaders => this.leaders = leaders);
+    .subscribe(leaders => this.leaders = leaders);
   }
 
 }

@@ -19,6 +19,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
+import { MatSliderModule } from '@angular/material/slider';
 import { ContactComponent } from './contact/contact.component';
 import 'hammerjs';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -30,8 +31,9 @@ import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
-
-
+import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { baseURL } from './shared/baseurl';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { LoginComponent } from './login/login.component';
     MatCardModule,
     MatButtonModule,
     AppRoutingModule,
+    HttpClientModule,
+	  HttpModule,
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -64,12 +68,14 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSliderModule
   ],
   providers: [
     DishService,
     PromotionService,
     LeaderService,
+    { provide: 'BaseURL', useValue: baseURL }
   ],
   entryComponents: [
     LoginComponent

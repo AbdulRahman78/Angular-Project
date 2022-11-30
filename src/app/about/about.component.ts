@@ -20,7 +20,7 @@ export class AboutComponent implements OnInit {
     this.dishService.getFeaturedDish()
     .subscribe(dish => this.dish = dish);
     // this.leader = this.leaderService.getFeaturedLeader();
-
+    
     this.leaderService.getLeaders()
     .subscribe(leaders => this.leaders = leaders);
   }

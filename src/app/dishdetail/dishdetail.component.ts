@@ -23,6 +23,7 @@ export class DishdetailComponent implements OnInit {
   dishes: Dish[];
   @ViewChild('fform') feedbackFormDirectives;
   dish: Dish;
+  errMess: string;
   dishIds: string[];
   prev: string;
   next: string;
@@ -59,10 +60,14 @@ export class DishdetailComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
+    this.dishservice.getDishIds()
+    .subscribe((dishIds) => this.dishIds = dishIds,
+    errmess => this.errMess = <any>errmess );
     // this.dishService.getDishes().subscribe(dishes => this.dishes = dishes);
     this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-    .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); this.visibility = 'shown';  this.setPrevNext(dish.id); });
+    .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); this.visibility = 'shown'; },
+      errmess => this.errMess = <any>errmess );
+      console.log(this.errMess);
   }
 
   createForm() {

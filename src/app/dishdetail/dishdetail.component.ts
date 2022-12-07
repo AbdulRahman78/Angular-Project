@@ -74,7 +74,7 @@ export class DishdetailComponent implements OnInit {
     this.commentForm = this.fb.group({
       author: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]],
       rating: '',
-      comment: ['', Validators.required, Validators.minLength(2), Validators.maxLength(25)]
+      comment: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)]]
     });
 	  this.commentForm.valueChanges
 	  	.subscribe(data => this.onValueChanged(data));
@@ -120,13 +120,14 @@ export class DishdetailComponent implements OnInit {
   onSubmit() {
     this.comment = this.commentForm.value;
     this.comment.date = new Date().toISOString();
+    console.log(this.comment.date);
 	this.dishcopy.comments.push(this.comment);
 	this.dishservice.putDish(this.dishcopy)
 	  .subscribe(dish => {
 		this.dish = dish;
 		this.dishcopy=dish;
-	}),
-	// errmess => { this.dish = null; this.dishcopy = null; this.errMess = <any>errmess; });
+	},
+	errmess => { this.dish = null; this.dishcopy = null; this.errMess = <any>errmess; });
 	
 	this.commentFormDirective.resetForm();
     this.commentForm.reset({
